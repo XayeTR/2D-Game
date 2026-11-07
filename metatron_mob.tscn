@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://cgjtuyoym1kso"]
+
+[ext_resource type="Script" uid="uid://djlqs26h1w6fn" path="res://metatron_mob.gd" id="1_w2j84"]
+[ext_resource type="Script" uid="uid://fbaoxda3lxgy" path="res://characters/slime/metatron.gd" id="2_jyx3v"]
+[ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://characters/ground_shadow.png" id="3_h5ogs"]
+[ext_resource type="AudioStream" uid="uid://cdnuax3io4uoj" path="res://sounds/hitHurt.wav" id="3_mg2fn"]
+[ext_resource type="Texture2D" uid="uid://ca2oudbntthin" path="res://characters/slime/GODOTMETATRON1.png" id="4_o3pib"]
+[ext_resource type="Texture2D" uid="uid://cy6bbn451n5ne" path="res://characters/slime/GODOTMETATRON2.png" id="5_v3be0"]
+[ext_resource type="Texture2D" uid="uid://dt7jeenex2ypx" path="res://characters/slime/GODOTMETATRON3.png" id="6_o3pib"]
+[ext_resource type="Script" uid="uid://dlo5h852yiq56" path="res://shooting_point_metatron.gd" id="7_h5ogs"]
+[ext_resource type="AudioStream" uid="uid://bg1sg3s1eibtm" path="res://sounds/aiiii metatron.wav" id="8_v3be0"]
+
+[sub_resource type="Animation" id="Animation_he2xl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/MetatronBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -112)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/MetatronBody:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anchor/MetatronBody:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_o3pib")]
+}
+
+[sub_resource type="Animation" id="Animation_7rgu0"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/MetatronBody:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.883, 0.838, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/MetatronBody:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_v3be0"), ExtResource("4_o3pib")]
+}
+
+[sub_resource type="Animation" id="Animation_v3be0"]
+resource_name = "shoot"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/MetatronBody:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_v3be0"), ExtResource("6_o3pib"), ExtResource("4_o3pib")]
+}
+
+[sub_resource type="Animation" id="Animation_5remm"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/MetatronBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -152), Vector2(0, -160), Vector2(0, -152)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rgu0"]
+_data = {
+&"RESET": SubResource("Animation_he2xl"),
+&"hurt": SubResource("Animation_7rgu0"),
+&"shoot": SubResource("Animation_v3be0"),
+&"walk": SubResource("Animation_5remm")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1w1g7"]
+radius = 85.0
+height = 236.0
+
+[node name="MetatronMob" type="CharacterBody2D" unique_id=1886240288]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_w2j84")
+
+[node name="Metatron" type="Node2D" parent="." unique_id=1295590612]
+unique_name_in_owner = true
+script = ExtResource("2_jyx3v")
+
+[node name="GroundShadow" type="Sprite2D" parent="Metatron" unique_id=906438321]
+scale = Vector2(1.1294734, 1.1294734)
+texture = ExtResource("3_h5ogs")
+
+[node name="Anchor" type="Marker2D" parent="Metatron" unique_id=1459779757]
+
+[node name="MetatronBody" type="Sprite2D" parent="Metatron/Anchor" unique_id=1854089074]
+unique_name_in_owner = true
+position = Vector2(0, -112)
+texture = ExtResource("4_o3pib")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Metatron" unique_id=1152855205]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_7rgu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104170552]
+position = Vector2(-3, -112)
+shape = SubResource("CapsuleShape2D_1w1g7")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1565196987]
+unique_name_in_owner = true
+stream = ExtResource("3_mg2fn")
+volume_db = -10.0
+
+[node name="WaveSound" type="AudioStreamPlayer2D" parent="." unique_id=826289527]
+unique_name_in_owner = true
+stream = ExtResource("8_v3be0")
+volume_db = -20.0
+
+[node name="ShootingPointMetatron" type="Marker2D" parent="." unique_id=219950500]
+unique_name_in_owner = true
+position = Vector2(0, -73)
+script = ExtResource("7_h5ogs")
+
+[node name="Timer" type="Timer" parent="." unique_id=725335855]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="ShootingPointMetatron" method="_on_timer_timeout"]

@@ -38,6 +38,7 @@ size_flags_vertical = 0
 color = Color(0.88235295, 1, 0.9607843, 1)
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1976143232]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,6 +66,7 @@ script = ExtResource("4_7jktm")
 
 [node name="GameOverScreen" type="CanvasLayer" parent="." unique_id=548466716]
 unique_name_in_owner = true
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GameOverScreen" unique_id=222976622]
 anchors_preset = 15
@@ -116,6 +118,11 @@ autostart = true
 
 [node name="Timer4" type="Timer" parent="." unique_id=1627292182]
 wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="Timer5" type="Timer" parent="." unique_id=888575482]
+wait_time = 5.0
 autostart = true
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
@@ -123,3 +130,4 @@ autostart = true
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
 [connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
 [connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
+[connection signal="timeout" from="Timer5" to="." method="_on_timer_5_timeout"]

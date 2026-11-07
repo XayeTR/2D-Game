@@ -23,3 +23,4 @@ shape = SubResource("CircleShape2D_t6fs7")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1485886240]
 unique_name_in_owner = true
 stream = ExtResource("3_8tt8g")
+volume_db = -10.0
