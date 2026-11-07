@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://hbtx6r724ah3"]
+
+[ext_resource type="Script" uid="uid://bf2qy6egjqm1v" path="res://shooting_mob.gd" id="1_m72jw"]
+[ext_resource type="PackedScene" uid="uid://gn8txcy2y66e" path="res://characters/slime/pink_slime.tscn" id="1_slwlw"]
+[ext_resource type="Script" uid="uid://cog8ke0w4dylo" path="res://shooting_point.gd" id="2_f6qva"]
+[ext_resource type="AudioStream" uid="uid://cdnuax3io4uoj" path="res://sounds/hitHurt.wav" id="4_5unh8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t6fs7"]
+radius = 55.00909
+
+[node name="ShootingMob" type="CharacterBody2D" unique_id=1478636327]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_m72jw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=631079359]
+position = Vector2(0, -27)
+shape = SubResource("CircleShape2D_t6fs7")
+
+[node name="ShootingPoint" type="Marker2D" parent="." unique_id=992796173]
+unique_name_in_owner = true
+script = ExtResource("2_f6qva")
+
+[node name="Timer" type="Timer" parent="." unique_id=1985501567]
+wait_time = 2.0
+autostart = true
+
+[node name="PinkSlime" parent="." unique_id=1217760420 instance=ExtResource("1_slwlw")]
+unique_name_in_owner = true
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=419447938]
+unique_name_in_owner = true
+stream = ExtResource("4_5unh8")
+
+[connection signal="timeout" from="Timer" to="ShootingPoint" method="_on_timer_timeout"]

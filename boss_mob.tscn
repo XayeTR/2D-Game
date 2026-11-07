@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dnlr8jswrxp7h"]
+
+[ext_resource type="Script" uid="uid://bbk63fgd63hrg" path="res://boss_mob.gd" id="1_77y05"]
+[ext_resource type="PackedScene" uid="uid://dvognsni8g65q" path="res://characters/slime/boss_king.tscn" id="2_8tt8g"]
+[ext_resource type="AudioStream" uid="uid://cdnuax3io4uoj" path="res://sounds/hitHurt.wav" id="3_8tt8g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t6fs7"]
+radius = 110.01818
+
+[node name="BossMob" type="CharacterBody2D" unique_id=1792570849]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_77y05")
+
+[node name="BossKing" parent="." unique_id=21707711 instance=ExtResource("2_8tt8g")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1012159208]
+position = Vector2(0, -56)
+shape = SubResource("CircleShape2D_t6fs7")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1485886240]
+unique_name_in_owner = true
+stream = ExtResource("3_8tt8g")

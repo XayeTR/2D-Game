@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://c1sx7bic4uhdj"]
+
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://yh2ao5or56lq" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://bnauvysqiq6ou" path="res://camera_2d.gd" id="3_hqtel"]
+[ext_resource type="PackedScene" uid="uid://du5i8r7jdycua" path="res://gun.tscn" id="3_i3pqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t6fs7"]
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_sweqy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2hs0m"]
+resource_name = "death"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(400, 0), Vector2(-400, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1jxqw"]
+_data = {
+&"RESET": SubResource("Animation_sweqy"),
+&"death": SubResource("Animation_2hs0m")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qei5"]
+radius = 38.052597
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfvcf"]
+bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6fs7"]
+bg_color = Color(0.3882353, 0.8, 0.37254903, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D" unique_id=1626011806]
+script = ExtResource("1_onrkg")
+
+[node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_4flbx")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1687292773]
+shape = SubResource("CircleShape2D_t6fs7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1942468941]
+script = ExtResource("3_hqtel")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D" unique_id=594937817]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_1jxqw")
+
+[node name="Gun" parent="." unique_id=1692736673 instance=ExtResource("3_i3pqv")]
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1339356976]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1463744392]
+rotation = 0.0033640305
+shape = SubResource("CircleShape2D_2qei5")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1233980499]
+unique_name_in_owner = true
+offset_left = -144.0
+offset_top = -144.0
+offset_right = 148.0
+offset_bottom = -108.028984
+theme_override_styles/background = SubResource("StyleBoxFlat_rfvcf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t6fs7")
+value = 100.0
+show_percentage = false
+
+[connection signal="health_depleted" from="." to="Camera2D" method="_on_player_health_depleted"]

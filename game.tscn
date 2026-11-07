@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://b3u84076due2"]
+
+[ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://dususlr2yr63q" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://d1y8lwsb2pd00" path="res://Bağurmuşadam.png" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://dv30mdqkfr62i" path="res://killed_mobs.gd" id="3_fc0e3"]
+[ext_resource type="Script" uid="uid://ccxhobqluukhg" path="res://elapsed_time.gd" id="4_7jktm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t6fs7"]
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7jktm"]
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Curve2D" id="Curve2D_7jktm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1229, -826, 0, 0, 0, 0, 1282, -826, 0, 0, 0, 0, 1278, 961, 0, 0, 0, 0, -1229, 957, 0, 0, 0, 0, -1229, -826)
+}
+point_count = 5
+
+[node name="Game" type="Node2D" unique_id=1918810504]
+y_sort_enabled = true
+script = ExtResource("1_fc0e3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=842161834]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=997928353]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color(0.88235295, 1, 0.9607843, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1976143232]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_feb5d")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1626726243]
+layer = 2
+
+[node name="KilledMobs" type="Label" parent="CanvasLayer2" unique_id=275565126]
+offset_right = 367.0
+offset_bottom = 83.0
+text = "Killed Mobs: "
+label_settings = SubResource("LabelSettings_t6fs7")
+script = ExtResource("3_fc0e3")
+
+[node name="ElapsedTime" type="Label" parent="CanvasLayer2" unique_id=1128470142]
+offset_top = 66.0
+offset_right = 175.0
+offset_bottom = 149.0
+text = "Time: "
+label_settings = SubResource("LabelSettings_7jktm")
+script = ExtResource("4_7jktm")
+
+[node name="GameOverScreen" type="CanvasLayer" parent="." unique_id=548466716]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="GameOverScreen" unique_id=222976622]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4745098)
+
+[node name="Label" type="Label" parent="GameOverScreen/ColorRect" unique_id=1272873665]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+text = "GEBERDİN"
+
+[node name="Player" parent="." unique_id=1626011806 instance=ExtResource("1_e2o6t")]
+motion_mode = 1
+
+[node name="Path2D" type="Path2D" parent="Player" unique_id=304370526]
+position = Vector2(-25, -57)
+curve = SubResource("Curve2D_7jktm")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1935756093]
+unique_name_in_owner = true
+position = Vector2(-1229, -826)
+
+[node name="Timer" type="Timer" parent="." unique_id=1237867801]
+wait_time = 0.3
+autostart = true
+
+[node name="Timer2" type="Timer" parent="." unique_id=2110576564]
+wait_time = 10.0
+autostart = true
+
+[node name="Timer3" type="Timer" parent="." unique_id=406578206]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer4" type="Timer" parent="." unique_id=1627292182]
+wait_time = 60.0
+autostart = true
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
