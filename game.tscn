@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1y8lwsb2pd00" path="res://Bağurmuşadam.png" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://dv30mdqkfr62i" path="res://killed_mobs.gd" id="3_fc0e3"]
 [ext_resource type="Script" uid="uid://ccxhobqluukhg" path="res://elapsed_time.gd" id="4_7jktm"]
+[ext_resource type="Script" uid="uid://dm0yfg5q8a55t" path="res://control.gd" id="5_ryrav"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t6fs7"]
 font_size = 60
@@ -24,10 +25,10 @@ point_count = 5
 y_sort_enabled = true
 script = ExtResource("1_fc0e3")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=842161834]
+[node name="Background" type="CanvasLayer" parent="." unique_id=842161834]
 layer = -5
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=997928353]
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=997928353]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,7 +38,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 color = Color(0.88235295, 1, 0.9607843, 1)
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1976143232]
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1976143232]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,17 +47,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_feb5d")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1626726243]
+[node name="Score" type="CanvasLayer" parent="." unique_id=1626726243]
 layer = 2
 
-[node name="KilledMobs" type="Label" parent="CanvasLayer2" unique_id=275565126]
+[node name="KilledMobs" type="Label" parent="Score" unique_id=275565126]
 offset_right = 367.0
 offset_bottom = 83.0
 text = "Killed Mobs: "
 label_settings = SubResource("LabelSettings_t6fs7")
 script = ExtResource("3_fc0e3")
 
-[node name="ElapsedTime" type="Label" parent="CanvasLayer2" unique_id=1128470142]
+[node name="ElapsedTime" type="Label" parent="Score" unique_id=1128470142]
 offset_top = 66.0
 offset_right = 175.0
 offset_bottom = 149.0
@@ -93,6 +94,29 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 200
 text = "GEBERDİN"
 
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1580475361]
+layer = 10
+
+[node name="Pause" type="Control" parent="PauseMenu" unique_id=781842645]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_ryrav")
+
+[node name="Background" type="ColorRect" parent="PauseMenu/Pause" unique_id=1796133497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.47058824)
+
 [node name="Player" parent="." unique_id=1626011806 instance=ExtResource("1_e2o6t")]
 motion_mode = 1
 
@@ -104,30 +128,30 @@ curve = SubResource("Curve2D_7jktm")
 unique_name_in_owner = true
 position = Vector2(-1229, -826)
 
-[node name="Timer" type="Timer" parent="." unique_id=1237867801]
-wait_time = 0.3
-autostart = true
-
-[node name="Timer2" type="Timer" parent="." unique_id=2110576564]
+[node name="Tree" type="Timer" parent="." unique_id=2110576564]
 wait_time = 10.0
 autostart = true
 
-[node name="Timer3" type="Timer" parent="." unique_id=406578206]
+[node name="Mob" type="Timer" parent="." unique_id=1237867801]
+wait_time = 0.5
+autostart = true
+
+[node name="ShootingMob" type="Timer" parent="." unique_id=406578206]
 wait_time = 5.0
 autostart = true
 
-[node name="Timer4" type="Timer" parent="." unique_id=1627292182]
-wait_time = 60.0
+[node name="BossMob" type="Timer" parent="." unique_id=1627292182]
+wait_time = 120.0
 one_shot = true
 autostart = true
 
-[node name="Timer5" type="Timer" parent="." unique_id=888575482]
-wait_time = 5.0
+[node name="Metatron" type="Timer" parent="." unique_id=888575482]
+wait_time = 60.0
 autostart = true
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
-[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
-[connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
-[connection signal="timeout" from="Timer5" to="." method="_on_timer_5_timeout"]
+[connection signal="timeout" from="Tree" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Mob" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootingMob" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="BossMob" to="." method="_on_timer_4_timeout"]
+[connection signal="timeout" from="Metatron" to="." method="_on_timer_5_timeout"]
