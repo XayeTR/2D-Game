@@ -7,6 +7,12 @@ var mob_count = 0
 var shooting_mob_count = 0
 var boss_king_count = 0
 var metatron_count = 0
+
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
 func spawn_mob():
 	if mob_count >= MAX_MOBS:
 		return
@@ -17,6 +23,7 @@ func spawn_mob():
 	add_child(new_mob)
 	mob_count += 1
 	new_mob.tree_exited.connect(_on_mob_tree_exited)
+
 
 func spawn_shooting_mob():
 	if shooting_mob_count >= MAX_SHOOTING_MOBS:
@@ -29,6 +36,7 @@ func spawn_shooting_mob():
 	shooting_mob_count += 1
 	new_shooting_mob.tree_exited.connect(_on_shooting_mob_tree_exited)
 
+
 func spawn_boss_king():
 	if boss_king_count >= MAX_BOSS_KINGS:
 		return
@@ -39,6 +47,7 @@ func spawn_boss_king():
 	add_child(new_boss_king)
 	shooting_mob_count += 1
 	new_boss_king.tree_exited.connect(_on_shooting_mob_tree_exited)
+
 
 func spawn_metatron():
 	if metatron_count >= MAX_METATRON:
@@ -59,6 +68,7 @@ func _on_boss_king_tree_exited():
 	boss_king_count -= 1
 func _on_metatron_mob_tree_exited():
 	metatron_count -= 1
+
 
 func spawn_tree():
 	var new_tree = preload("res://pine_tree.tscn").instantiate()
