@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://isdule8bnbmp"]
+
+[ext_resource type="Script" uid="uid://bjm7nbev2oj6d" path="res://pause_menu.gd" id="1_mj8uy"]
+[ext_resource type="Texture2D" uid="uid://bd0hrnc1hs5vs" path="res://Vector_UI_Pack_dobo_ui/Modals/darkModalSimple_dark.png" id="1_ue6oa"]
+[ext_resource type="Texture2D" uid="uid://cpgh5qfelbw0h" path="res://Vector_UI_Pack_dobo_ui/Buttons/buttonAdvanced_black.png" id="3_mj8uy"]
+[ext_resource type="Script" uid="uid://uekw58oj3h33" path="res://continue_button.gd" id="4_3rlp6"]
+[ext_resource type="Script" uid="uid://bkhgasxbxv0t0" path="res://quit_game_button.gd" id="5_obik5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3rlp6"]
+texture = ExtResource("3_mj8uy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ltg2s"]
+texture = ExtResource("3_mj8uy")
+modulate_color = Color(0.73803073, 0.7380309, 0.7380307, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vealc"]
+texture = ExtResource("3_mj8uy")
+modulate_color = Color(1.353256, 1.353256, 1.353256, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xlnb1"]
+texture = ExtResource("3_mj8uy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d6n2q"]
+texture = ExtResource("3_mj8uy")
+modulate_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5wnrh"]
+texture = ExtResource("3_mj8uy")
+modulate_color = Color(1.353256, 1.353256, 1.353256, 1)
+
+[node name="GameUI" type="CanvasLayer" unique_id=26638587]
+process_mode = 3
+layer = 100
+
+[node name="GameUI" type="Control" parent="." unique_id=1286102735]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="Control" parent="GameUI" unique_id=911995427]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mj8uy")
+
+[node name="Background" type="MarginContainer" parent="GameUI/PauseMenu" unique_id=1060777938]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameUI/PauseMenu/Background" unique_id=339645501]
+layout_mode = 2
+color = Color(0, 0, 0, 0.4509804)
+
+[node name="PauseMenuBox" type="MarginContainer" parent="GameUI/PauseMenu/Background" unique_id=1959708546]
+custom_minimum_size = Vector2(840, 1080)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameUI/PauseMenu/Background/PauseMenuBox" unique_id=1078619107]
+layout_mode = 2
+texture = ExtResource("1_ue6oa")
+
+[node name="ButtonsBox" type="MarginContainer" parent="GameUI/PauseMenu/Background/PauseMenuBox" unique_id=1400060068]
+custom_minimum_size = Vector2(640, 980)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ButtonContanier" type="VBoxContainer" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox" unique_id=294328220]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="ContinueButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=232064270]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_3rlp6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ltg2s")
+theme_override_styles/hover = SubResource("StyleBoxTexture_vealc")
+text = "Continue"
+script = ExtResource("4_3rlp6")
+
+[node name="UpgradeButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=1388111963]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SettingsButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=958334892]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuitGameButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=802863954]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_xlnb1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_d6n2q")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5wnrh")
+text = "	Quit Game"
+script = ExtResource("5_obik5")

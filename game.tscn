@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1y8lwsb2pd00" path="res://Bağurmuşadam.png" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://dv30mdqkfr62i" path="res://killed_mobs.gd" id="3_fc0e3"]
 [ext_resource type="Script" uid="uid://ccxhobqluukhg" path="res://elapsed_time.gd" id="4_7jktm"]
-[ext_resource type="Script" uid="uid://dm0yfg5q8a55t" path="res://control.gd" id="5_ryrav"]
+[ext_resource type="PackedScene" uid="uid://isdule8bnbmp" path="res://game_ui.tscn" id="5_ryrav"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t6fs7"]
 font_size = 60
@@ -94,28 +94,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 200
 text = "GEBERDİN"
 
-[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1580475361]
-layer = 10
-
-[node name="Pause" type="Control" parent="PauseMenu" unique_id=781842645]
-process_mode = 3
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_ryrav")
-
-[node name="Background" type="ColorRect" parent="PauseMenu/Pause" unique_id=1796133497]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.47058824)
+[node name="GameUI" parent="." unique_id=26638587 instance=ExtResource("5_ryrav")]
 
 [node name="Player" parent="." unique_id=1626011806 instance=ExtResource("1_e2o6t")]
 motion_mode = 1
