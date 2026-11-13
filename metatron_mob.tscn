@@ -153,12 +153,10 @@ shape = SubResource("CapsuleShape2D_1w1g7")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1565196987]
 unique_name_in_owner = true
 stream = ExtResource("3_mg2fn")
-volume_db = -10.0
 
 [node name="WaveSound" type="AudioStreamPlayer2D" parent="." unique_id=826289527]
 unique_name_in_owner = true
 stream = ExtResource("8_v3be0")
-volume_db = -20.0
 
 [node name="ShootingPointMetatron" type="Marker2D" parent="." unique_id=219950500]
 unique_name_in_owner = true

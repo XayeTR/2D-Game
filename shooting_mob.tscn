@@ -32,6 +32,5 @@ unique_name_in_owner = true
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=419447938]
 unique_name_in_owner = true
 stream = ExtResource("4_5unh8")
-volume_db = -10.0
 
 [connection signal="timeout" from="Timer" to="ShootingPoint" method="_on_timer_timeout"]

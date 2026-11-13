@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://isdule8bnbmp"]
 
 [ext_resource type="Script" uid="uid://bjm7nbev2oj6d" path="res://pause_menu.gd" id="1_mj8uy"]
-[ext_resource type="Texture2D" uid="uid://bd0hrnc1hs5vs" path="res://Vector_UI_Pack_dobo_ui/Modals/darkModalSimple_dark.png" id="1_ue6oa"]
 [ext_resource type="Texture2D" uid="uid://cpgh5qfelbw0h" path="res://Vector_UI_Pack_dobo_ui/Buttons/buttonAdvanced_black.png" id="3_mj8uy"]
 [ext_resource type="Script" uid="uid://uekw58oj3h33" path="res://continue_button.gd" id="4_3rlp6"]
+[ext_resource type="Script" uid="uid://5d0m62olymfp" path="res://settings_button.gd" id="5_ltg2s"]
 [ext_resource type="Script" uid="uid://bkhgasxbxv0t0" path="res://quit_game_button.gd" id="5_obik5"]
+[ext_resource type="Script" uid="uid://c2up01j1g3d4r" path="res://settings_menu.gd" id="6_ltg2s"]
+[ext_resource type="Script" uid="uid://d10t535gamn2i" path="res://volume_slider.gd" id="6_vealc"]
+[ext_resource type="Texture2D" uid="uid://dnegjxu7bwfsf" path="res://Vector_UI_Pack_dobo_ui/Containers/colorContainer_black.png" id="6_xlnb1"]
+[ext_resource type="Texture2D" uid="uid://bg70xfpejqpdb" path="res://Vector_UI_Pack_dobo_ui/Arrows/arrow_black.png" id="8_d6n2q"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3rlp6"]
 texture = ExtResource("3_mj8uy")
@@ -14,6 +18,17 @@ texture = ExtResource("3_mj8uy")
 modulate_color = Color(0.73803073, 0.7380309, 0.7380307, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vealc"]
+texture = ExtResource("3_mj8uy")
+modulate_color = Color(1.353256, 1.353256, 1.353256, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uisgv"]
+texture = ExtResource("3_mj8uy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vay52"]
+texture = ExtResource("3_mj8uy")
+modulate_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pmdkx"]
 texture = ExtResource("3_mj8uy")
 modulate_color = Color(1.353256, 1.353256, 1.353256, 1)
 
@@ -28,11 +43,22 @@ modulate_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
 texture = ExtResource("3_mj8uy")
 modulate_color = Color(1.353256, 1.353256, 1.353256, 1)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t6fs7"]
+texture = ExtResource("8_d6n2q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2qei5"]
+texture = ExtResource("8_d6n2q")
+modulate_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfvcf"]
+texture = ExtResource("8_d6n2q")
+modulate_color = Color(1.353256, 1.353256, 1.353256, 1)
+
 [node name="GameUI" type="CanvasLayer" unique_id=26638587]
-process_mode = 3
 layer = 100
 
 [node name="GameUI" type="Control" parent="." unique_id=1286102735]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,6 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PauseMenu" type="Control" parent="GameUI" unique_id=911995427]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,41 +76,50 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mj8uy")
 
-[node name="Background" type="MarginContainer" parent="GameUI/PauseMenu" unique_id=1060777938]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="GameUI/PauseMenu/Background" unique_id=339645501]
-layout_mode = 2
+[node name="BlackOverlay" type="ColorRect" parent="GameUI/PauseMenu" unique_id=339645501]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(0, 0, 0, 0.4509804)
 
-[node name="PauseMenuBox" type="MarginContainer" parent="GameUI/PauseMenu/Background" unique_id=1959708546]
+[node name="PauseMenuBox" type="MarginContainer" parent="GameUI/PauseMenu" unique_id=1959708546]
 custom_minimum_size = Vector2(840, 1080)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -540.0
+offset_right = 420.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="NinePatchRect" type="NinePatchRect" parent="GameUI/PauseMenu/Background/PauseMenuBox" unique_id=1078619107]
+[node name="BackgroundTexture" type="NinePatchRect" parent="GameUI/PauseMenu/PauseMenuBox" unique_id=1078619107]
 layout_mode = 2
-texture = ExtResource("1_ue6oa")
+texture = ExtResource("6_xlnb1")
+patch_margin_left = 15
+patch_margin_top = 40
+patch_margin_right = 15
+patch_margin_bottom = 40
 
-[node name="ButtonsBox" type="MarginContainer" parent="GameUI/PauseMenu/Background/PauseMenuBox" unique_id=1400060068]
+[node name="ButtonsBox" type="MarginContainer" parent="GameUI/PauseMenu/PauseMenuBox" unique_id=1400060068]
 custom_minimum_size = Vector2(640, 980)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ButtonContanier" type="VBoxContainer" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox" unique_id=294328220]
+[node name="ButtonContanier" type="VBoxContainer" parent="GameUI/PauseMenu/PauseMenuBox/ButtonsBox" unique_id=294328220]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 100
 
-[node name="ContinueButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=232064270]
+[node name="ContinueButton" type="Button" parent="GameUI/PauseMenu/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=232064270]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -95,19 +131,25 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_vealc")
 text = "Continue"
 script = ExtResource("4_3rlp6")
 
-[node name="UpgradeButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=1388111963]
+[node name="UpgradeButton" type="Button" parent="GameUI/PauseMenu/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=1388111963]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SettingsButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=958334892]
+[node name="SettingsButton" type="Button" parent="GameUI/PauseMenu/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=958334892]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_uisgv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vay52")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pmdkx")
+text = "Settings"
+script = ExtResource("5_ltg2s")
 
-[node name="QuitGameButton" type="Button" parent="GameUI/PauseMenu/Background/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=802863954]
+[node name="QuitGameButton" type="Button" parent="GameUI/PauseMenu/PauseMenuBox/ButtonsBox/ButtonContanier" unique_id=802863954]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -118,3 +160,94 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_d6n2q")
 theme_override_styles/hover = SubResource("StyleBoxTexture_5wnrh")
 text = "	Quit Game"
 script = ExtResource("5_obik5")
+
+[node name="SettingsMenu" type="Control" parent="GameUI" unique_id=44370442]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_ltg2s")
+
+[node name="CenterContanier" type="MarginContainer" parent="GameUI/SettingsMenu" unique_id=1765665602]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -35.0
+offset_right = 11.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameUI/SettingsMenu/CenterContanier" unique_id=374258263]
+custom_minimum_size = Vector2(860, 1080)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_xlnb1")
+patch_margin_left = 11
+patch_margin_top = 35
+patch_margin_right = 11
+patch_margin_bottom = 35
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/SettingsMenu/CenterContanier" unique_id=1682424069]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="EmptyContainer" type="MarginContainer" parent="GameUI/SettingsMenu/CenterContanier/HBoxContainer" unique_id=105581297]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SettingsMenu/CenterContanier/HBoxContainer" unique_id=901101126]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="EmptyContainer" type="MarginContainer" parent="GameUI/SettingsMenu/CenterContanier/HBoxContainer/VBoxContainer" unique_id=812757450]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="GameUI/SettingsMenu/CenterContanier/HBoxContainer/VBoxContainer" unique_id=1464951300]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = -1.5707964
+theme_override_styles/normal = SubResource("StyleBoxTexture_t6fs7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2qei5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rfvcf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/SettingsMenu/CenterContanier" unique_id=1153286933]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VolumeSlider" type="HSlider" parent="GameUI/SettingsMenu/CenterContanier/VBoxContainer" unique_id=35636522]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.005
+value = 0.1
+script = ExtResource("6_vealc")
+
+[node name="Label" type="Label" parent="GameUI/SettingsMenu/CenterContanier/VBoxContainer/VolumeSlider" unique_id=1189896823]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 11.0
+offset_right = -5.0
+offset_bottom = 34.0
+text = "Volume"
+
+[connection signal="pressed" from="GameUI/PauseMenu/PauseMenuBox/ButtonsBox/ButtonContanier/ContinueButton" to="GameUI/PauseMenu" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="GameUI/SettingsMenu/CenterContanier/HBoxContainer/VBoxContainer/BackButton" to="GameUI/SettingsMenu" method="_on_back_button_pressed"]
+[connection signal="value_changed" from="GameUI/SettingsMenu/CenterContanier/VBoxContainer/VolumeSlider" to="GameUI/SettingsMenu/CenterContanier/VBoxContainer/VolumeSlider" method="_on_value_changed"]

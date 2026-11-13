@@ -1,4 +1,4 @@
 extends Button
 
 func _pressed() -> void:
-	Global.game_paused = false
+	Global.pause_menu_visible = false

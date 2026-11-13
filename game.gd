@@ -79,8 +79,6 @@ func spawn_tree():
 
 func _on_player_health_depleted() -> void:
 	%GameOverScreen.visible = true
-	await get_tree().create_timer(3.0).timeout
-	get_tree().paused = true
 
 
 func _on_timer_timeout() -> void:
